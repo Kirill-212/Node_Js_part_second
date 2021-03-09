@@ -1,0 +1,11 @@
+<div class="div">
+    {{#if btn}}
+    {{#each list}}
+    <a class="button " href="http://localhost:3000/Update?id={{id}}">name - {{name}} phone number - {{phone_number}}</a>
+    {{/each}}
+    {{else}}
+    {{#each list}}
+    <a class="button ">name - {{name}} phone number - {{phone_number}}</a>
+    {{/each}}
+    {{/if}}
+</div>

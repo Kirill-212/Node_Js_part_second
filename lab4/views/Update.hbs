@@ -1,0 +1,16 @@
+{{>list}}
+
+<div class="div5 group">
+    <input type="text" name="name" placeholder="name" id="name1" value="{{name}}" onchange="Change()"></input>
+    <input type="text" name="phone_number" placeholder="phone number" id="phone_number1" value="{{phone_number}}"
+        onchange="Change()"></input>
+</div>
+<div class="div5">
+    <button onclick="Update({{id}})" class="button1">
+        update
+    </button>
+    <button onclick="Delete({{id}})" id="buttonDelete" class="button1">
+        delete
+    </button>
+    {{#cancel}}{{/cancel}}
+</div>
