@@ -58,7 +58,7 @@ app.post("/Register", urlencodedParser, (req, res) => {
   }
 });
 app.get("/logout", jwt.LogOut, (req, res) => {
-  //res.cookie(config.jwt.tokens.refresh.type, { expires: Date.now(0) });
+  //res.cookie(config.jwt.tokens.refresh.type, { expires: Date.now(0) });,{path:'/refresh-token'}
   res.clearCookie(config.jwt.tokens.access.type);
   res.clearCookie(config.jwt.tokens.refresh.type);
   res.redirect("/login");

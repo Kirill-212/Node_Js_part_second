@@ -45,6 +45,7 @@ module.exports = {
       });
   },
   LogOut: async (req, res, next) => {
+    console.log(req.cookies[tokens.refresh.type]);
     await jwt.verify(
       req.cookies[tokens.refresh.type],
       secret,
