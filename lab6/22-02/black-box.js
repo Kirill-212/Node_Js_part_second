@@ -31,10 +31,15 @@ module.exports = {
     // client.del(username);
     return new Promise(function (resolve, reject) {
       client.get(username, (err, result) => {
-        console.log("1");
-        if (result == null) resolve(true);
-        let res = result.split("|");
-        console.log(res.indexOf(jwt));
+        let res = result;
+        if (result == null) return resolve(true);
+
+        if (result.indexOf("|") == -1) {
+          res = result;
+        } else {
+          res = result.split("|");
+        }
+
         if (res.indexOf(jwt) == -1) {
           resolve(true);
         } else {

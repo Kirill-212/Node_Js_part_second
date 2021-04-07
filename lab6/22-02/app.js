@@ -57,11 +57,10 @@ app.post("/Register", urlencodedParser, (req, res) => {
     return res.sendStatus(404);
   }
 });
-app.get("/logout", (req, res) => {
-  //, { expires: new Date(0) }
-
-  res.clearCookie(config.jwt.tokens.refresh.type);
+app.get("/logout", jwt.LogOut, (req, res) => {
+  //res.cookie(config.jwt.tokens.refresh.type, { expires: Date.now(0) });
   res.clearCookie(config.jwt.tokens.access.type);
+  res.clearCookie(config.jwt.tokens.refresh.type);
   res.redirect("/login");
 });
 

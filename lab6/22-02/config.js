@@ -21,6 +21,7 @@ module.exports = {
     maxAge: 1000 * 60 * 1440,
     httpOnly: true,
     sameSite: "Strict",
-    path: "/refresh-token",
+    path: "/",
+    //path: "/refresh-token",
   },
 };

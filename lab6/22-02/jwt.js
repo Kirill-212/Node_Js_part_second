@@ -44,6 +44,19 @@ module.exports = {
           .send(JSON.stringify({ ERROR: "token is not valid" }));
       });
   },
+  LogOut: async (req, res, next) => {
+    await jwt.verify(
+      req.cookies[tokens.refresh.type],
+      secret,
+      async (err, decoded) => {
+        blackList.AddBlackList(
+          decoded["username"],
+          req.cookies[tokens.refresh.type]
+        );
+        next();
+      }
+    );
+  },
   CheckJwtRefresh: async (req, res, next) => {
     console.log(req.cookies);
 
