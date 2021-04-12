@@ -45,10 +45,13 @@ app.get(
 
 //Logout
 app.get("/logout", (req, res) => {
+	
   req.session.logout = true;
-  req.session = null;
-  req.logout();
+  req.session.destroy(e => {
+	  req.logout();
   res.redirect("/login");
+  });
+  
 });
 
 app.use(function (request, response) {
