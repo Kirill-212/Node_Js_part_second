@@ -1,4 +1,5 @@
 const app = require("express")();
+const fs = require("fs");
 const { createClient } = require("webdav");
 const webDavClient = createClient("https://webdav.yandex.ru", {
   username: "kirillbolvako",
@@ -34,7 +35,7 @@ app.post("/rd/:folder", (req, res) => {
           .deleteFile(dict)
           .then(() => ({ message: `Directory '${dict}' removed` }));
       } else {
-        res.status(408);
+        res.status(404);
         return { error: "Directory is not exists" };
       }
     })
@@ -43,14 +44,16 @@ app.post("/rd/:folder", (req, res) => {
 });
 
 app.post("/up/:file", (req, res) => {
+  //
   try {
-    let path = `/${req.params.file}`;
+    const filePath = "./" + req.params.file;
+    let rs = fs.createReadStream(filePath);
+    let ws = webDavClient.createWriteStream(req.params.file);
+    rs.pipe(ws);
 
-    req.pipe(webDavClient.createWriteStream(path)).on("end", () => {
-      res.json({ message: `File '${path}' upload` });
-    });
+    res.json({ message: "File's been uploaded" });
   } catch (err) {
-    res.status(408).json({ error: err.message });
+    res.status(408).json({ error: err.toString() });
   }
 });
 
@@ -82,7 +85,7 @@ app.post("/del/:file", (req, res) => {
           .deleteFile(path)
           .then(() => ({ message: `File '${path}' removed` }));
       } else {
-        res.status(408);
+        res.status(404);
         return { error: "File is not exists" };
       }
     })
