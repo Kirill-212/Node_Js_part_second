@@ -17,17 +17,24 @@ app.get("/", (req, res) => {
 });
 
 app.get("/resourse", (req, res) => {
-  let context = req.body;
-  if (serverDH && context) {
-    const serverSecret = serverDH.getSecret(context);
+  try {
+    let context = req.body;
+    if (serverDH && context) {
+      const serverSecret = serverDH.getSecret(context);
 
-    const cipher = crypto.createCipher("aes256", serverSecret.toString());
-    const text = fs.readFileSync(`${__dirname}/file.txt`, { encoding: "utf8" });
-    console.log("file data  ", text);
-    const encrypted = cipher.update(text, "utf8", "hex") + cipher.final("hex");
+      const cipher = crypto.createCipher("aes256", serverSecret.toString());
+      const text = fs.readFileSync(`${__dirname}/file.txt`, {
+        encoding: "utf8",
+      });
+      console.log("file data  ", text);
+      const encrypted =
+        cipher.update(text, "utf8", "hex") + cipher.final("hex");
 
-    res.json({ txt: encrypted });
-  } else {
+      res.json({ txt: encrypted });
+    } else {
+      res.status(409).json({ msg: "Deffi-Hellman error" });
+    }
+  } catch {
     res.status(409).json({ msg: "Deffi-Hellman error" });
   }
 });

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <div>sum(3, 4): <span id="sum"></span></div>
+    <div>sub(3, 4): <span id="sub"></span></div>
+    <div>mul(3, 4): <span id="mul"></span></div>
+</div>
+<script>
+(async()=>{
+    const res= fetch('http://localhost:3000/p.wasm');
+    const {module,instance}=await WebAssembly.instantiateStreaming(res);
+    console.log(res)
+            //console.log(webAsmObject.instance.exports.sum(3, 4))
+            sum.innerText = instance.exports.sum(3, 4);
+            sub.innerText = instance.exports.sub(3, 4);
+            mul.innerText =instance.exports.mul(3, 4);
+})();
+    
+</script>
+</body>
+</html>

@@ -16,7 +16,7 @@ app
       .then((response) => {
         let signature = response.sign;
         let txt = response.file;
-
+        console.log(signature);
         const text = fs.createReadStream(`${__dirname}/fileC.txt`);
         let data = "";
         text.on("data", (chunk) => {

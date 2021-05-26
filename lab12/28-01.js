@@ -24,7 +24,7 @@ const controller = {
 };
 
 let validator = function (params, _, raw) {
-  console.log(params);
+  console.log(_);
   if (!Array.isArray(params)) throw new Error("is not array");
   if (params.length != 2) throw new Error("only two param");
   if (!Number.isInteger(params[0]) || !Number.isInteger(params[1]))
