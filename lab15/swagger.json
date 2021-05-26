@@ -1,0 +1,150 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My User Project CRUD",
+        "description": "My User Project Application API"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+        "/TS": {
+            "get": {
+                "tags": [
+                    "TS"
+                ],
+                "summary": "Get all TS in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TSs"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "TS"
+                ],
+                "description": "Create new TS in system",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "TS that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/TS"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New TS is created",
+                        "schema": {
+                            "$ref": "#/definitions/TS"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update TS",
+                "tags": [
+                    "TS"
+                ],
+                "parameters": [
+                    {
+                        "name": "TS",
+                        "in": "body",
+                        "description": "TS with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/TS"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User is updated",
+                        "schema": {
+                            "$ref": "#/definitions/TS"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete TS",
+                "tags": [
+                    "TS"
+                ],
+                "parameters": [
+                    {
+                        "name": "TS",
+                        "in": "body",
+                        "description": "TS with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "TC is delete",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "id": {
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "TS": {
+            "required": [
+                "first_name",
+                "id",
+                "phone_number",
+                "last_name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "TSs": {
+            "type": "array",
+            "$ref": "#/definitions/TS"
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ]
+}
